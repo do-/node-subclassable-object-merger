@@ -8,13 +8,13 @@ The public npm [registry](https://www.npmjs.com/) contains a plethora of modules
 Some of them are basically single functions with fixed logic hardly suitable for any extending, for instance:
 * [deep-object-merger](https://github.com/DavideCometa/Deep-Object-Merger) (just a recursive `Object.assign()`)
 * [multi-merge](https://github.com/eballci/multi-merge) (+something special about Boolean values)
-* [object-merger](https://github.com/jarradseers/object-merger) (concatenating arrays)
+* [object-merger](https://github.com/jarradseers/object-merger) (never mind Booleans, concatenate arrays)
 
 Others offer to set up sophisticated custom rules using some languages other than plain ECMAScript:
 * [decorated-merger](https://github.com/neckaros/decorated-merger) (TypeScript Decorations)
 * [json-object-merge](https://github.com/sodaru/json-object-merge) (JSONPath)
 
-The author of this module needed something very close to the basic naive implementation, but easily customizable by the means of standard ECMAScript. This is why `subclassable-object-merger` was created.
+The author of this module needed something very close to the basic naive implementation, but easily customizable by the means of standard ES. This is why `subclassable-object-merger` was created.
 
 # Installation
 ```sh
