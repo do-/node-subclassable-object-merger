@@ -24,7 +24,13 @@ npm install subclassable-object-merger
 # Usage
 ```js
 const {ObjectMerger} = require ('subclassable-object-merger')
-const om = new ObjectMerger ()
+const om = new ObjectMerger (
+//{override: [
+//  'scalar',
+//  'array',
+//  'object',
+//]}
+)
 
 const t1 = {
 	name: 'users',
@@ -69,19 +75,25 @@ om.merge (t1, t2) /* result:
 })
 */
 ```
+## Constructor
+May be invoked without parameters or with a single `{override}` object. 
+
+### The `override` option
+When set, `override` must be an array of type names (see `getType ()` below) to be forcibly overridden in case of conflict.
+
+In particular, setting `{override: ['scalar']}` will lead to `merge ({name: 'specific'}, {name: 'default'})` into `{name: 'specific'}` instead of throwing an error.
 
 # Internals
 ## Instance properties
-The only property is named `sum`: this is the object mapping type names (see `getType` below) to corresponding type specific adding functions. Simply put:
+The only property is `sum`: the object mapping type names to corresponding type specific adding functions. Simply put:
 ```js
 this.sum = {
   array: (a, b) => a.concat (b),
   object: (a, b) => this.merge (a, b),			
-  scalar: (a, b) => a // but complains unless a != b
+  scalar: (a, b) => a === b ? a : throw Error ()
 }
 ```
-## Constructor
-Takes no parameters, just fills in `this.sum`. Inheriting classes may add some options, extend the set of types etc.
+With the `override` option, `a => a` is set for types listed therein.
 
 ## Methods
 ### getType (a)
